@@ -6,100 +6,50 @@
     <title>Blog - Joel Loter</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Dark Mode Styles */
-        :root {
-            color-scheme: light;
-        }
+        * { font-family: 'Poppins', sans-serif; }
+        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; font-weight: 700; }
+        body { font-family: 'Inter', sans-serif; }
         
-        body.dark-mode {
-            color-scheme: dark;
-        }
+        :root { color-scheme: light; }
+        body.dark-mode { color-scheme: dark; }
+        .dark-mode { background-color: #0a0e27; color: #e0e0e0; }
+        .dark-mode .bg-white { background-color: #1a1f3a; }
+        .dark-mode .bg-gray-50 { background-color: #0f1428; }
+        .dark-mode .bg-gray-100 { background-color: #16213e; }
+        .dark-mode .text-gray-700 { color: #e0e0e0; }
+        .dark-mode .text-gray-600 { color: #b0b0b0; }
+        .dark-mode .text-gray-800 { color: #f0f0f0; }
+        .dark-mode .border-gray-100 { border-color: #0f3460; }
+        .dark-mode .shadow-sm { box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.8); }
         
-        .dark-mode {
-            background-color: #1a1a2e;
-            color: #e0e0e0;
-        }
+        .nav-link { position: relative; transition: all 0.3s ease; }
+        .nav-link::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -5px; left: 0; background: linear-gradient(90deg, #3b82f6, #8b5cf6); transition: width 0.3s ease; }
+        .nav-link:hover::after { width: 100%; }
+        .nav-link:hover { color: #3b82f6; transform: translateY(-2px); }
         
-        .dark-mode .bg-white {
-            background-color: #16213e;
-        }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .fade-in { animation: fadeInUp 0.8s ease forwards; opacity: 0; }
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
         
-        .dark-mode .bg-gray-50 {
-            background-color: #0f3460;
-        }
+        .blog-card { transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); position: relative; border-radius: 20px; overflow: hidden; }
+        .blog-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(59, 130, 246, 0.25); }
+        .blog-card img { transition: transform 0.6s ease; }
+        .blog-card:hover img { transform: scale(1.1); filter: brightness(1.05); }
         
-        .dark-mode .bg-gray-100 {
-            background-color: #16213e;
-        }
+        .text-gradient { background: linear-gradient(135deg, #3b82f6, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .btn-glow { position: relative; overflow: hidden; transition: all 0.3s ease; }
+        .btn-glow:hover { transform: translateY(-3px); box-shadow: 0 15px 35px rgba(59, 130, 246, 0.4); }
         
-        .dark-mode .text-gray-700 {
-            color: #e0e0e0;
-        }
-        
-        .dark-mode .text-gray-600 {
-            color: #b0b0b0;
-        }
-        
-        .dark-mode .text-gray-800 {
-            color: #f0f0f0;
-        }
-        
-        .dark-mode .border-gray-100 {
-            border-color: #0f3460;
-        }
-        
-        .dark-mode .shadow-sm {
-            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.8);
-        }
-        
-        .nav-link {
-            position: relative;
-        }
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 0;
-            background-color: #3b82f6;
-            transition: width 0.3s ease;
-        }
-        .nav-link:hover::after {
-            width: 100%;
-        }
-        
-        .blog-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .blog-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .fade-in {
-            animation: fadeIn 0.8s ease forwards;
-        }
-        
-        .delay-100 {
-            animation-delay: 0.1s;
-        }
-        .delay-200 {
-            animation-delay: 0.2s;
-        }
-        .delay-300 {
-            animation-delay: 0.3s;
-        }
+        html { scroll-behavior: smooth; }
+        section { position: relative; overflow: hidden; }
+        section::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.05), transparent); pointer-events: none; z-index: 0; }
     </style>
 </head>
 <body class="font-sans bg-gray-50 text-gray-800">
-    <!-- Navigation -->
     <nav class="bg-white shadow-sm fixed w-full z-10">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
@@ -112,22 +62,14 @@
                     <a href="projects.html" class="nav-link text-gray-700 hover:text-blue-600 px-3 py-2">Projects</a>
                     <a href="blog.html" class="nav-link text-gray-700 hover:text-blue-600 px-3 py-2">Blog</a>
                     <a href="contact.html" class="nav-link text-gray-700 hover:text-blue-600 px-3 py-2">Contact</a>
-                    <button id="dark-mode-toggle" class="text-gray-700 hover:text-blue-600 px-3 py-2 focus:outline-none">
-                        <i class="fas fa-moon"></i>
-                    </button>
+                    <button id="dark-mode-toggle" class="text-gray-700 hover:text-blue-600 px-3 py-2 focus:outline-none"><i class="fas fa-moon"></i></button>
                 </div>
                 <div class="md:hidden flex items-center space-x-4">
-                    <button id="dark-mode-toggle-mobile" class="text-gray-700 hover:text-blue-600 focus:outline-none">
-                        <i class="fas fa-moon"></i>
-                    </button>
-                    <button id="menu-toggle" class="text-gray-700 hover:text-blue-600 focus:outline-none">
-                        <i class="fas fa-bars text-xl"></i>
-                    </button>
+                    <button id="dark-mode-toggle-mobile" class="text-gray-700 hover:text-blue-600 focus:outline-none"><i class="fas fa-moon"></i></button>
+                    <button id="menu-toggle" class="text-gray-700 hover:text-blue-600 focus:outline-none"><i class="fas fa-bars text-xl"></i></button>
                 </div>
             </div>
         </div>
-        
-        <!-- Mobile menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 <a href="index.html" class="block px-3 py-2 text-gray-700 hover:text-blue-600">Home</a>
@@ -139,96 +81,37 @@
         </div>
     </nav>
 
-    <!-- Blog Header -->
     <section class="pt-24 pb-12 md:pt-32 md:pb-16 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h1 class="text-4xl md:text-5xl font-bold mb-4 fade-in">My Blog</h1>
-            <p class="text-lg text-blue-100 fade-in delay-100">Articles about development, coding, and technology</p>
+            <h1 class="text-5xl md:text-6xl font-bold mb-4 fade-in">My Blog</h1>
+            <p class="text-xl text-blue-100 fade-in delay-100">Articles about development, coding, and technology</p>
         </div>
     </section>
 
-    <!-- Blog Section -->
     <section class="py-16 bg-gray-50">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <!-- Blog Post 1 -->
             <article class="blog-card bg-white rounded-xl overflow-hidden shadow-md border border-gray-100 mb-8 fade-in">
-                <div class="h-64 overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Django Best Practices" class="w-full h-full object-cover">
-                </div>
-                <div class="p-8">
-                    <div class="flex items-center gap-4 mb-4">
-                        <span class="bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full">Django</span>
-                        <span class="text-gray-500 text-sm"><i class="fas fa-calendar"></i> Jan 5, 2024</span>
-                        <span class="text-gray-500 text-sm"><i class="fas fa-clock"></i> 5 min read</span>
-                    </div>
-                    <h2 class="text-3xl font-bold mb-3 text-gray-800">Django Best Practices: Building Scalable Applications</h2>
-                    <p class="text-gray-600 mb-4">
-                        Learn the best practices for building scalable Django applications. We'll explore project structure, database optimization, caching strategies, and deployment techniques that will help you build production-ready applications.
-                    </p>
-                    <a href="#" class="text-blue-600 hover:text-blue-800 font-semibold">Read More <i class="fas fa-arrow-right ml-2"></i></a>
-                </div>
+                <div class="h-64 overflow-hidden"><img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Django" class="w-full h-full object-cover"></div>
+                <div class="p-8"><div class="flex items-center gap-4 mb-4"><span class="bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full">Django</span><span class="text-gray-500 text-sm"><i class="fas fa-calendar"></i> Jan 5, 2024</span><span class="text-gray-500 text-sm"><i class="fas fa-clock"></i> 5 min read</span></div><h2 class="text-3xl font-bold mb-3 text-gray-800">Django Best Practices: Building Scalable Applications</h2><p class="text-gray-600 mb-4">Learn the best practices for building scalable Django applications. We'll explore project structure, database optimization, caching strategies, and deployment techniques.</p><a href="#" class="text-blue-600 hover:text-blue-800 font-semibold btn-glow">Read More <i class="fas fa-arrow-right ml-2"></i></a></div>
             </article>
 
-            <!-- Blog Post 2 -->
             <article class="blog-card bg-white rounded-xl overflow-hidden shadow-md border border-gray-100 mb-8 fade-in delay-100">
-                <div class="h-64 overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1516321318423-f06f70259b51?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="RESTful API Design" class="w-full h-full object-cover">
-                </div>
-                <div class="p-8">
-                    <div class="flex items-center gap-4 mb-4">
-                        <span class="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full">API Design</span>
-                        <span class="text-gray-500 text-sm"><i class="fas fa-calendar"></i> Jan 1, 2024</span>
-                        <span class="text-gray-500 text-sm"><i class="fas fa-clock"></i> 7 min read</span>
-                    </div>
-                    <h2 class="text-3xl font-bold mb-3 text-gray-800">RESTful API Design: A Complete Guide</h2>
-                    <p class="text-gray-600 mb-4">
-                        Discover the principles of RESTful API design and how to build robust APIs that are easy to use and maintain. This guide covers HTTP methods, status codes, versioning, and authentication strategies.
-                    </p>
-                    <a href="#" class="text-blue-600 hover:text-blue-800 font-semibold">Read More <i class="fas fa-arrow-right ml-2"></i></a>
-                </div>
+                <div class="h-64 overflow-hidden"><img src="https://images.unsplash.com/photo-1516321318423-f06f70259b51?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="API" class="w-full h-full object-cover"></div>
+                <div class="p-8"><div class="flex items-center gap-4 mb-4"><span class="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full">API Design</span><span class="text-gray-500 text-sm"><i class="fas fa-calendar"></i> Jan 1, 2024</span><span class="text-gray-500 text-sm"><i class="fas fa-clock"></i> 7 min read</span></div><h2 class="text-3xl font-bold mb-3 text-gray-800">RESTful API Design: A Complete Guide</h2><p class="text-gray-600 mb-4">Discover the principles of RESTful API design and how to build robust APIs. This guide covers HTTP methods, status codes, versioning, and authentication strategies.</p><a href="#" class="text-blue-600 hover:text-blue-800 font-semibold btn-glow">Read More <i class="fas fa-arrow-right ml-2"></i></a></div>
             </article>
 
-            <!-- Blog Post 3 -->
             <article class="blog-card bg-white rounded-xl overflow-hidden shadow-md border border-gray-100 mb-8 fade-in delay-200">
-                <div class="h-64 overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1633356122544-f134324ef6db?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Cybersecurity Tips" class="w-full h-full object-cover">
-                </div>
-                <div class="p-8">
-                    <div class="flex items-center gap-4 mb-4">
-                        <span class="bg-red-100 text-red-800 text-sm px-3 py-1 rounded-full">Security</span>
-                        <span class="text-gray-500 text-sm"><i class="fas fa-calendar"></i> Dec 28, 2023</span>
-                        <span class="text-gray-500 text-sm"><i class="fas fa-clock"></i> 6 min read</span>
-                    </div>
-                    <h2 class="text-3xl font-bold mb-3 text-gray-800">Essential Cybersecurity Tips for Developers</h2>
-                    <p class="text-gray-600 mb-4">
-                        Protect your applications from common security vulnerabilities. Learn about SQL injection, XSS attacks, CSRF protection, secure password storage, and other essential security practices.
-                    </p>
-                    <a href="#" class="text-blue-600 hover:text-blue-800 font-semibold">Read More <i class="fas fa-arrow-right ml-2"></i></a>
-                </div>
+                <div class="h-64 overflow-hidden"><img src="https://images.unsplash.com/photo-1633356122544-f134324ef6db?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Security" class="w-full h-full object-cover"></div>
+                <div class="p-8"><div class="flex items-center gap-4 mb-4"><span class="bg-red-100 text-red-800 text-sm px-3 py-1 rounded-full">Security</span><span class="text-gray-500 text-sm"><i class="fas fa-calendar"></i> Dec 28, 2023</span><span class="text-gray-500 text-sm"><i class="fas fa-clock"></i> 6 min read</span></div><h2 class="text-3xl font-bold mb-3 text-gray-800">Essential Cybersecurity Tips for Developers</h2><p class="text-gray-600 mb-4">Protect your applications from vulnerabilities. Learn about SQL injection, XSS attacks, CSRF protection, secure password storage, and essential security practices.</p><a href="#" class="text-blue-600 hover:text-blue-800 font-semibold btn-glow">Read More <i class="fas fa-arrow-right ml-2"></i></a></div>
             </article>
 
-            <!-- Blog Post 4 -->
             <article class="blog-card bg-white rounded-xl overflow-hidden shadow-md border border-gray-100 fade-in delay-300">
-                <div class="h-64 overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Python Performance" class="w-full h-full object-cover">
-                </div>
-                <div class="p-8">
-                    <div class="flex items-center gap-4 mb-4">
-                        <span class="bg-yellow-100 text-yellow-800 text-sm px-3 py-1 rounded-full">Python</span>
-                        <span class="text-gray-500 text-sm"><i class="fas fa-calendar"></i> Dec 25, 2023</span>
-                        <span class="text-gray-500 text-sm"><i class="fas fa-clock"></i> 8 min read</span>
-                    </div>
-                    <h2 class="text-3xl font-bold mb-3 text-gray-800">Optimizing Python Code for Performance</h2>
-                    <p class="text-gray-600 mb-4">
-                        Improve your Python application's performance with practical optimization techniques. We'll cover profiling, caching, async programming, and other strategies to make your code faster.
-                    </p>
-                    <a href="#" class="text-blue-600 hover:text-blue-800 font-semibold">Read More <i class="fas fa-arrow-right ml-2"></i></a>
-                </div>
+                <div class="h-64 overflow-hidden"><img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Python" class="w-full h-full object-cover"></div>
+                <div class="p-8"><div class="flex items-center gap-4 mb-4"><span class="bg-yellow-100 text-yellow-800 text-sm px-3 py-1 rounded-full">Python</span><span class="text-gray-500 text-sm"><i class="fas fa-calendar"></i> Dec 25, 2023</span><span class="text-gray-500 text-sm"><i class="fas fa-clock"></i> 8 min read</span></div><h2 class="text-3xl font-bold mb-3 text-gray-800">Optimizing Python Code for Performance</h2><p class="text-gray-600 mb-4">Improve application performance with practical techniques. We'll cover profiling, caching, async programming, and other strategies for faster code.</p><a href="#" class="text-blue-600 hover:text-blue-800 font-semibold btn-glow">Read More <i class="fas fa-arrow-right ml-2"></i></a></div>
             </article>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="bg-gray-800 text-white py-8 mt-16">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row justify-between items-center">
@@ -250,54 +133,19 @@
     </footer>
 
     <script>
-        // Dark Mode Toggle
         const darkModeToggle = document.getElementById('dark-mode-toggle');
         const darkModeToggleMobile = document.getElementById('dark-mode-toggle-mobile');
         const html = document.documentElement;
-        
-        // Load saved dark mode preference
         const isDarkMode = localStorage.getItem('darkMode') === 'true';
-        if (isDarkMode) {
-            html.classList.add('dark-mode');
-            updateDarkModeIcon();
-        }
-        
-        function updateDarkModeIcon() {
-            const icon = html.classList.contains('dark-mode') ? 'fa-sun' : 'fa-moon';
-            if (darkModeToggle) darkModeToggle.querySelector('i').className = `fas ${icon}`;
-            if (darkModeToggleMobile) darkModeToggleMobile.querySelector('i').className = `fas ${icon}`;
-        }
-        
-        function toggleDarkMode() {
-            html.classList.toggle('dark-mode');
-            localStorage.setItem('darkMode', html.classList.contains('dark-mode'));
-            updateDarkModeIcon();
-        }
-        
+        if (isDarkMode) { html.classList.add('dark-mode'); updateDarkModeIcon(); }
+        function updateDarkModeIcon() { const icon = html.classList.contains('dark-mode') ? 'fa-sun' : 'fa-moon'; if (darkModeToggle) darkModeToggle.querySelector('i').className = `fas ${icon}`; if (darkModeToggleMobile) darkModeToggleMobile.querySelector('i').className = `fas ${icon}`; }
+        function toggleDarkMode() { html.classList.toggle('dark-mode'); localStorage.setItem('darkMode', html.classList.contains('dark-mode')); updateDarkModeIcon(); }
         if (darkModeToggle) darkModeToggle.addEventListener('click', toggleDarkMode);
         if (darkModeToggleMobile) darkModeToggleMobile.addEventListener('click', toggleDarkMode);
-        
-        // Mobile menu toggle
-        document.getElementById('menu-toggle').addEventListener('click', function() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
-        });
-
-        // Animation on scroll
+        document.getElementById('menu-toggle').addEventListener('click', function() { const menu = document.getElementById('mobile-menu'); menu.classList.toggle('hidden'); });
         const fadeElements = document.querySelectorAll('.fade-in');
-        
-        const fadeObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, { threshold: 0.1 });
-        
-        fadeElements.forEach(element => {
-            fadeObserver.observe(element);
-        });
+        const fadeObserver = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.style.opacity = '1'; entry.target.style.transform = 'translateY(0)'; } }); }, { threshold: 0.1 });
+        fadeElements.forEach(element => { fadeObserver.observe(element); });
     </script>
 </body>
 </html>
